@@ -197,32 +197,9 @@ namespace WpfApp1
             int.TryParse(txtDpidFullPopupValue.Text, out fullPopupValue);
             int.TryParse(txtDpidAlertFullValue.Text, out dpidAlertValue);
 
-            if (fullPopupValue == 0 || string.IsNullOrEmpty(dpidAlertName))
+            if (string.IsNullOrEmpty(dpidAlertName))
             {
-                int popupError = 0;
-
-                if (fullPopupValue == 0)
-                {
-                    popupError |= 1;
-                }
-
-                if (string.IsNullOrEmpty(dpidAlertName))
-                {
-                    popupError |= 2;
-                }
-
-                if (popupError == 1)
-                {
-                    MessageBox.Show("Please correct FULL POPUP value!", "Notice");
-                }
-                else if (popupError == 2)
-                {
-                    MessageBox.Show("Please correct DPID ALERT name!", "Notice");
-                }
-                else if (popupError == 3)
-                {
-                    MessageBox.Show("Please correct FULL POPUP and DPID ALERT name!", "Notice");
-                }
+                MessageBox.Show("Please correct DPID ALERT name!", "Notice");
 
                 return;
             }
