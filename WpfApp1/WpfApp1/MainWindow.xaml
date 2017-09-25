@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="MMIKey Client" Height="515" Width="728" KeyDown="Window_KeyDown" Loaded="Window_Loaded">
+        Title="MMIKey Client" Height="515" Width="875" KeyDown="Window_KeyDown" Loaded="Window_Loaded" ResizeMode="NoResize">
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="427*"/>
@@ -37,28 +37,28 @@
 				<Button x:Name="btnAccOff" Content="ACC Off" HorizontalAlignment="Left" Margin="152,16,0,0" VerticalAlignment="Top" Width="94" Height="40" Click="btnAccOff_Click"/>
 			</Grid>
 		</GroupBox>
-		<TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="401" Margin="317,32,0,0" VerticalAlignment="Top" Width="385" Grid.RowSpan="2">
+		<TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="401" Margin="317,32,0,0" VerticalAlignment="Top" Width="540">
 			<TabItem Header="Alert">
 				<Grid>
-					<GroupBox x:Name="groupFullPopup" Header="FULL POPUP" HorizontalAlignment="Left" Height="167" VerticalAlignment="Top" Width="369">
+					<GroupBox x:Name="groupFullPopup" Header="FULL POPUP" HorizontalAlignment="Left" Height="167" VerticalAlignment="Top" Width="520" >
 						<Grid>
 							<Label x:Name="label2" Content="DPID__FullPopup" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
 							<Label x:Name="label2_Copy" Content="DPID__ALERT__FULL__XXX" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
 							<Label x:Name="label2_Copy1" Content="DPID__ALERT__FULL__XXX:value" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top"/>
 							<TextBox x:Name="txtDpidFullPopupValue" HorizontalAlignment="Left" Height="23" Margin="177,10,0,0" TextWrapping="Wrap" Text="308" VerticalAlignment="Top" Width="170" TabIndex="2147483645"/>
-							<TextBox x:Name="txtDpidAlertFullName" HorizontalAlignment="Left" Height="23" Margin="177,43,0,0" TextWrapping="Wrap" Text="DPID_ALERT_FULL_DIMMING_CONTROL_IN" VerticalAlignment="Top" Width="170"/>
+							<TextBox x:Name="txtDpidAlertFullName" HorizontalAlignment="Left" Height="23" Margin="177,43,0,0" TextWrapping="Wrap" Text="DPID_ALERT_FULL_DIMMING_CONTROL_IN" VerticalAlignment="Top" Width="321"/>
 							<TextBox x:Name="txtDpidAlertFullValue" HorizontalAlignment="Left" Height="23" Margin="177,74,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="170"/>
 							<Button x:Name="btnFullPopupOn" Content="On" HorizontalAlignment="Left" Margin="177,113,0,0" VerticalAlignment="Top" Width="74" Click="btnFullPopupOn_Click"/>
 							<Button x:Name="btnFullPopupOff" Content="Off" HorizontalAlignment="Left" Margin="271,113,0,0" VerticalAlignment="Top" Width="76" Click="btnFullPopupOff_Click"/>
 						</Grid>
 					</GroupBox>
-					<GroupBox x:Name="groupMiniPopup" Header="MINI POPUP" HorizontalAlignment="Left" Height="167" VerticalAlignment="Top" Width="369" Margin="0,192,0,0">
+					<GroupBox x:Name="groupMiniPopup" Header="MINI POPUP" HorizontalAlignment="Left" Height="167" VerticalAlignment="Top" Width="520" Margin="0,192,0,0">
 						<Grid>
 							<Label x:Name="label3" Content="DPID__MiniPopup" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
 							<Label x:Name="label2_Copy2" Content="DPID__ALERT__MINI__XXX" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
 							<Label x:Name="label2_Copy3" Content="DPID__ALERT__FULL__XXX:value" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top"/>
 							<TextBox x:Name="txtDpidMiniPopupValue" HorizontalAlignment="Left" Height="23" Margin="177,10,0,0" TextWrapping="Wrap" Text="3014" VerticalAlignment="Top" Width="170"/>
-							<TextBox x:Name="txtDpidAlertMiniName" HorizontalAlignment="Left" Height="23" Margin="177,43,0,0" TextWrapping="Wrap" Text="DPID_SCC_STATIC_AND_POPUP_IN" VerticalAlignment="Top" Width="170"/>
+							<TextBox x:Name="txtDpidAlertMiniName" HorizontalAlignment="Left" Height="23" Margin="177,43,0,0" TextWrapping="Wrap" Text="DPID_SCC_STATIC_AND_POPUP_IN" VerticalAlignment="Top" Width="321"/>
 							<TextBox x:Name="txtDpidAlertMiniValue" HorizontalAlignment="Left" Height="23" Margin="177,74,0,0" TextWrapping="Wrap" Text="4" VerticalAlignment="Top" Width="170"/>
 							<Button x:Name="btnMiniPopupOn" Content="On" HorizontalAlignment="Left" Margin="177,113,0,0" VerticalAlignment="Top" Width="74" Click="btnMiniPopupOn_Click"/>
 							<Button x:Name="btnMiniPopupOff" Content="Off" HorizontalAlignment="Left" Margin="271,113,0,0" VerticalAlignment="Top" Width="76" Click="btnMiniPopupOff_Click"/>
@@ -87,7 +87,7 @@
 				</Grid>
 			</TabItem>
 		</TabControl>
-		<StatusBar HorizontalAlignment="Left" Height="37" VerticalAlignment="Top" Width="720" Grid.Row="1" Margin="0,1,0,0">
+		<StatusBar HorizontalAlignment="Left" Height="37" VerticalAlignment="Top" Grid.Row="1" Width="869">
 			<StackPanel Orientation="Horizontal">
 				<Label x:Name="lblStatus" Content="Status:"/>
 				<Label x:Name="lblStatusRun" Content=""/>
