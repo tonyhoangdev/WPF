@@ -1,0 +1,31 @@
+﻿<Window x:Class="HMIMouseClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HMIMouseClient"
+        mc:Ignorable="d"
+        Title="HMIMouseClient" Height="170" Width="400" Loaded="Window_Loaded" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="103*"/>
+            <RowDefinition Height="38*"/>
+        </Grid.RowDefinitions>
+        <StatusBar HorizontalAlignment="Left" Height="37" VerticalAlignment="Top" Grid.Row="1" Width="394" FontSize="10">
+            <StackPanel Orientation="Horizontal">
+                <Label x:Name="lblStatus" Content="Status:"/>
+                <Label x:Name="lblStatusRun" Content=""/>
+                <Label x:Name="lblStatusPointDown" Content=""/>
+                <Label x:Name="lblStatusPointUp" Content=""/>
+            </StackPanel>
+        </StatusBar>
+        <Button x:Name="btnConnect" Content="Connect" HorizontalAlignment="Left" Margin="11,45,0,0" VerticalAlignment="Top" Width="109" Click="btnConnect_Click" Height="36"/>
+        <Button x:Name="btnDisconnect" Content="Disconnect" HorizontalAlignment="Left" Margin="134,45,0,0" VerticalAlignment="Top" Width="113" Click="btnDisconnect_Click" Height="36"/>
+        <CheckBox x:Name="cbAutoConnect" Content="Auto connect" HorizontalAlignment="Left" Margin="265,56,0,0" VerticalAlignment="Top" Height="15" Width="91" RenderTransformOrigin="0.769,0.533"/>
+        <TextBox x:Name="txtIP" HorizontalAlignment="Left" Height="23" Margin="28,7,0,0" TextWrapping="Wrap" Text="192.168.0.100" VerticalAlignment="Top" Width="133"/>
+        <TextBox x:Name="txtPort" HorizontalAlignment="Left" Height="23" Margin="196,7,0,0" TextWrapping="Wrap" Text="55555" VerticalAlignment="Top" Width="51" RenderTransformOrigin="0.902,0.435"/>
+        <TextBlock HorizontalAlignment="Left" Margin="166,10,0,0" TextWrapping="Wrap" Text="Port:" VerticalAlignment="Top" Height="16" Width="25"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="IP:" VerticalAlignment="Top" Height="16" Width="13"/>
+
+    </Grid>
+</Window>

@@ -7,8 +7,8 @@ using System.Windows;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MMIKey Client")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("HMIMouseClient")]
+[assembly: AssemblyDescription("HMI Mouse Client")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("SPD Team")]
 [assembly: AssemblyProduct("Utils")]
@@ -53,3 +53,5 @@ using System.Windows;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.1.0.0")]
 [assembly: AssemblyFileVersion("1.1.0.0")]
+[assembly: Guid("e2618da2-f87d-4b4a-bfaf-2426619fa2b2")]
+
