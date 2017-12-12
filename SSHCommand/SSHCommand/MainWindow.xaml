@@ -5,19 +5,42 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SSHCommand"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="369" Width="711">
 	<Grid>
-		<Label x:Name="label" Content="IP:" HorizontalAlignment="Left" Margin="24,10,0,0" VerticalAlignment="Top"/>
-		<TextBox x:Name="txtIP" HorizontalAlignment="Left" Height="23" Margin="100,10,0,0" TextWrapping="Wrap" Text="10.218.140.31" VerticalAlignment="Top" Width="162"/>
-		<Button x:Name="btnConnect" Content="Connect" HorizontalAlignment="Left" Margin="24,105,0,0" VerticalAlignment="Top" Width="75" Click="btnConnect_Click"/>
-		<Button x:Name="btnUpFile" Content="Up file" HorizontalAlignment="Left" Margin="114,105,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.278,0.434" Click="btnUpFile_Click"/>
-		<Button x:Name="btnBuild" Content="Build" HorizontalAlignment="Left" Margin="210,105,0,0" VerticalAlignment="Top" Width="87" Click="btnBuild_Click"/>
-		<Label x:Name="lblStatus" Content="Status: " HorizontalAlignment="Left" Margin="30,146,0,0" VerticalAlignment="Top" Width="267"/>
-		<Button x:Name="btnDownFile" Content="Down file" HorizontalAlignment="Left" Margin="318,105,0,0" VerticalAlignment="Top" Width="75" Click="btnDownFile_Click"/>
-		<TextBox x:Name="txtUser" HorizontalAlignment="Left" Height="23" Margin="100,40,0,0" TextWrapping="Wrap" Text="minh.hoang" VerticalAlignment="Top" Width="162"/>
-		<Label x:Name="label1" Content="User:" HorizontalAlignment="Left" Margin="24,37,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.424,0.401"/>
-		<Label x:Name="label2" Content="Password:" HorizontalAlignment="Left" Margin="24,63,0,0" VerticalAlignment="Top"/>
-		<PasswordBox x:Name="passwordBox" HorizontalAlignment="Left" Margin="100,69,0,0" VerticalAlignment="Top" Width="162" Password="12345"/>
+		<GroupBox x:Name="groupBox" Header="Server" HorizontalAlignment="Left" Height="309" Margin="10,10,0,0" VerticalAlignment="Top" Width="307">
+			<Grid>
+				<Label x:Name="label" Content="IP:" HorizontalAlignment="Left" Margin="10,9,0,0" VerticalAlignment="Top"/>
+				<TextBox x:Name="txtIP" HorizontalAlignment="Left" Height="23" Margin="86,9,0,0" TextWrapping="Wrap" Text="10.218.140.31" VerticalAlignment="Top" Width="100"/>
+				<Label x:Name="label3" Content="Port:" HorizontalAlignment="Left" Margin="191,9,0,0" VerticalAlignment="Top"/>
+				<TextBox x:Name="txtPort" HorizontalAlignment="Left" Height="23" Margin="231,9,0,0" TextWrapping="Wrap" Text="22" VerticalAlignment="Top" Width="37" RenderTransformOrigin="0.5,0.5"/>
+				<TextBox x:Name="txtUser" HorizontalAlignment="Left" Height="23" Margin="86,39,0,0" TextWrapping="Wrap" Text="minh.hoang" VerticalAlignment="Top" Width="140"/>
+				<Label x:Name="label2" Content="Password:" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top"/>
+				<PasswordBox x:Name="passwordBox" HorizontalAlignment="Left" Margin="86,68,0,0" VerticalAlignment="Top" Width="140" Password="12345"/>
+				<Button x:Name="btnConnect" Content="Connect" HorizontalAlignment="Left" Margin="10,104,0,0" VerticalAlignment="Top" Width="75" Click="btnConnect_Click"/>
+				<Button x:Name="btnUpFile" Content="Up file" HorizontalAlignment="Left" Margin="111,104,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.278,0.434" Click="btnUpFile_Click"/>
+				<Button x:Name="btnBuild" Content="Build" HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top" Width="87" Click="btnBuild_Click"/>
+				<Button x:Name="btnDownFile" Content="Down file" HorizontalAlignment="Left" Margin="111,140,0,0" VerticalAlignment="Top" Width="75" Click="btnDownFile_Click"/>
+				<Label x:Name="lblStatus" Content="Status: " HorizontalAlignment="Left" Margin="10,179,0,0" VerticalAlignment="Top" Width="267"/>
+				<Label x:Name="label1" Content="User:" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.424,0.401"/>
+			</Grid>
+		</GroupBox>
+		<GroupBox x:Name="groupBox1" Header="Board" HorizontalAlignment="Left" Height="309" Margin="350,10,0,0" VerticalAlignment="Top" Width="336">
+			<Grid>
+				<Label x:Name="label_Copy" Content="IP:" HorizontalAlignment="Left" Margin="17,10,0,0" VerticalAlignment="Top"/>
+				<TextBox x:Name="txtIPBoard" HorizontalAlignment="Left" Height="23" Margin="93,10,0,0" TextWrapping="Wrap" Text="20.20.20.2" VerticalAlignment="Top" Width="100"/>
+				<TextBox x:Name="txtPortBoard" HorizontalAlignment="Left" Height="23" Margin="238,10,0,0" TextWrapping="Wrap" Text="2200" VerticalAlignment="Top" Width="37" RenderTransformOrigin="0.5,0.5"/>
+				<TextBox x:Name="txtUserBoard" HorizontalAlignment="Left" Height="23" Margin="93,40,0,0" TextWrapping="Wrap" Text="root" VerticalAlignment="Top" Width="140"/>
+				<PasswordBox x:Name="passwordBoxBoard" HorizontalAlignment="Left" Margin="93,69,0,0" VerticalAlignment="Top" Width="140" Password=""/>
+				<Button x:Name="btnConnectBoard" Content="Connect" HorizontalAlignment="Left" Margin="17,105,0,0" VerticalAlignment="Top" Width="75" Click="btnConnectBoard_Click"/>
+				<Button x:Name="btnUpFileBoard" Content="Up file" HorizontalAlignment="Left" Margin="118,105,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.278,0.434" Click="btnUpFileBoard_Click"/>
+				<Label x:Name="lblStatusBoard" Content="Status: " HorizontalAlignment="Left" Margin="17,181,0,0" VerticalAlignment="Top" Width="267" RenderTransformOrigin="0.487,-0.423"/>
+				<Label x:Name="label1_Copy" Content="User:" HorizontalAlignment="Left" Margin="17,37,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.424,0.401"/>
+				<Button x:Name="btnDownFileBoard" Content="Down file" HorizontalAlignment="Left" Margin="17,142,0,0" VerticalAlignment="Top" Width="75" Click="btnDownFileBoard_Click"/>
+				<Label x:Name="label2_Copy" Content="Password:" HorizontalAlignment="Left" Margin="17,63,0,0" VerticalAlignment="Top"/>
+				<Label x:Name="label3_Copy" Content="Port:" HorizontalAlignment="Left" Margin="198,10,0,0" VerticalAlignment="Top"/>
+				<Button x:Name="btnDebugBoard" Content="Debug" HorizontalAlignment="Left" Margin="118,142,0,0" VerticalAlignment="Top" Width="75" Click="btnDebugBoard_Click"/>
+			</Grid>
+		</GroupBox>
 
 	</Grid>
 </Window>

@@ -25,6 +25,7 @@ namespace SSHCommand
     public partial class MainWindow : Window
     {
         PasswordConnectionInfo info = null;
+        PasswordConnectionInfo infoBoard = null;
         string user = null;
         string pass = null;
 
@@ -65,7 +66,7 @@ namespace SSHCommand
 
         private void btnConnect_Click(object sender, RoutedEventArgs e)
         {
-            info = new PasswordConnectionInfo(txtIP.Text, txtUser.Text, passwordBox.Password);
+            info = new PasswordConnectionInfo(txtIP.Text, Convert.ToInt32(txtPort.Text), txtUser.Text, passwordBox.Password);
             // info = new PasswordConnectionInfo(txtIP.Text, "root", "");
 
             using (var client = new SshClient(info))
@@ -118,7 +119,7 @@ namespace SSHCommand
 
         private void btnDownFile_Click(object sender, RoutedEventArgs e)
         {
-            info = new PasswordConnectionInfo(txtIP.Text, txtUser.Text, passwordBox.Password);
+            info = new PasswordConnectionInfo(txtIP.Text, Convert.ToInt32(txtPort.Text), txtUser.Text, passwordBox.Password);
 
             using (var sftp = new SftpClient(info))
             {
@@ -150,5 +151,69 @@ namespace SSHCommand
             }
         }
 
+        SshClient clientBoard = null;
+        private void btnConnectBoard_Click(object sender, RoutedEventArgs e)
+        {
+            infoBoard = new PasswordConnectionInfo(txtIPBoard.Text, Convert.ToInt32(txtPortBoard.Text), txtUserBoard.Text, passwordBoxBoard.Password);
+
+            clientBoard = new SshClient(infoBoard);
+
+            clientBoard.Connect();
+            lblStatusBoard.Content = "Connected";      
+            
+
+            clientBoard.RunCommand("mount -n -o remount, rw /").ToString();
+        }
+
+        private void btnUpFileBoard_Click(object sender, RoutedEventArgs e)
+        {
+            SftpClient sftp = null;
+
+            try
+            {
+                using (sftp = new SftpClient(infoBoard))
+                {
+                    string uploadfile = "debug";
+
+                    sftp.Connect();
+                    sftp.ChangeDirectory("/Apps");
+                    using (var upfileStream = File.OpenRead(uploadfile))
+                    {
+                        sftp.UploadFile(upfileStream, uploadfile, true);
+                    }
+
+                    lblStatusBoard.Content = "Uploaded: " + uploadfile + " file!";
+                }
+            }
+            catch (Exception)
+            {
+                lblStatusBoard.Content = "Upload Fail!";
+            }
+            finally
+            {
+                sftp.Disconnect();
+            }
+
+        }
+
+        private void btnDownFileBoard_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        bool boardToggle = false;
+        private void btnDebugBoard_Click(object sender, RoutedEventArgs e)
+        {
+            boardToggle = !boardToggle;
+            if (boardToggle)
+            {
+                clientBoard.RunCommand("/Apps/debug DYN DP_ID_SETTING_LANGUAGE 1 0");
+            }
+            else
+            {
+                clientBoard.RunCommand("/Apps/debug DYN DP_ID_SETTING_LANGUAGE 1 1");
+            }
+
+        }
     }
 }
