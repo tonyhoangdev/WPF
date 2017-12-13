@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Threading;
 using System.Net.NetworkInformation;
 using SpdTeam.Hooks;
+using System.Net;
 
 namespace HMIMouseClient
 {
@@ -14,8 +15,8 @@ namespace HMIMouseClient
     /// </summary>
     public partial class MainWindow : Window
     {
-        private const int PORT_NUMBER = 55555;
-        private const string IP = "192.168.0.100";
+        private int PORT_NUMBER = 55555;
+        private string IP = "192.168.0.100";
         static ASCIIEncoding encoding = new ASCIIEncoding();
         TcpClient client = null;
         bool isConnected = false;
@@ -41,9 +42,12 @@ namespace HMIMouseClient
 
         private void UninstallMouse()
         {
-            mouseHook.LeftButtonDown -= new MouseHook.MouseHookCallback(mouseHook_LeftButtonDown);
-            mouseHook.LeftButtonUp -= new MouseHook.MouseHookCallback(mouseHook_LeftButtonUp);
-            mouseHook.Uninstall();
+            if (mouseHook != null)
+            {
+                mouseHook.LeftButtonDown -= new MouseHook.MouseHookCallback(mouseHook_LeftButtonDown);
+                mouseHook.LeftButtonUp -= new MouseHook.MouseHookCallback(mouseHook_LeftButtonUp);
+                mouseHook.Uninstall();
+            }
 
             lblStatusPointDown.Content = "x: | y: ";
         }
@@ -63,7 +67,7 @@ namespace HMIMouseClient
             isMouseLeftButtonDown = false;
 
             lblStatusPointDown.Content = "Down: x: " + mouseStruct.pt.x + " | y: " + mouseStruct.pt.y;
-            string appName = "./touchinput";
+            string appName = "/opt/bin/touchinput";
             string args = string.Format(" tap {0} {1}", mouseStruct.pt.x, mouseStruct.pt.y);
             string cmd = appName + args;
 
@@ -105,8 +109,18 @@ namespace HMIMouseClient
         }
 
         bool isServerAvailable = false;
+        IPAddress address;
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
+            if (!IPAddress.TryParse(txtIP.Text.Trim(), out address))
+            {
+                lblStatus.Content = "IP ERROR...!";
+                return;
+            }
+
+            IP = txtIP.Text.Trim();
+            lblStatus.Content = STATUS_HEDAER;
+
             using (Ping ping = new Ping())
             {
                 ping.PingCompleted += new PingCompletedEventHandler(PingCompletedCallback);
@@ -124,9 +138,9 @@ namespace HMIMouseClient
             try
             {
                 client = new TcpClient();
-                int port;
-                int.TryParse(txtPort.Text, out port);
-                var result = client.BeginConnect(txtIP.Text.Trim(), port, null, null);
+                int.TryParse(txtPort.Text, out PORT_NUMBER);
+                IP = txtIP.Text.Trim();
+                var result = client.BeginConnect(IP, PORT_NUMBER, null, null);
                 var success = result.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(1));
 
                 if (!success)
@@ -168,9 +182,13 @@ namespace HMIMouseClient
                 btnConnect.IsEnabled = false;
                 btnDisconnect.IsEnabled = true;
                 lblStatus.Content = STATUS_HEDAER + "Connected!";
+                txtIP.IsEnabled = false;
+                txtPort.IsEnabled = false;
             }
             else
             {
+                txtIP.IsEnabled = true;
+                txtPort.IsEnabled = true;
                 btnConnect.IsEnabled = true;
                 btnDisconnect.IsEnabled = false;
                 lblStatus.Content = STATUS_HEDAER + "Disconnected!";
