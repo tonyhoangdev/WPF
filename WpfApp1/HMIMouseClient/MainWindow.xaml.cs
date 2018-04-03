@@ -7,6 +7,8 @@ using System.Windows.Threading;
 using System.Net.NetworkInformation;
 using SpdTeam.Hooks;
 using System.Net;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace HMIMouseClient
 {
@@ -23,6 +25,8 @@ namespace HMIMouseClient
         const string STATUS_HEDAER = "Status: ";
         DispatcherTimer dispatcherTimer = new DispatcherTimer();
         MouseHook mouseHook;
+        private static Bitmap screenBitmap;
+        private static Graphics screenGraphics;
 
         public MainWindow()
         {
@@ -30,6 +34,7 @@ namespace HMIMouseClient
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
             dispatcherTimer.Start();
+            InstallMouse();
         }
 
         private void InstallMouse()
@@ -193,6 +198,16 @@ namespace HMIMouseClient
                 btnDisconnect.IsEnabled = false;
                 lblStatus.Content = STATUS_HEDAER + "Disconnected!";
             }
+        }
+
+        private void btnCapture_Click(object sender, RoutedEventArgs e)
+        {
+            screenBitmap = new Bitmap(1920, 1080, PixelFormat.Format32bppArgb);
+            screenGraphics = Graphics.FromImage(screenBitmap);
+            screenGraphics.CopyFromScreen(0, 0,
+                        0, 0, screenBitmap.Size, CopyPixelOperation.SourceCopy);
+
+            screenBitmap.Save("sdasdf", ImageFormat.Png);
         }
     }
 }
