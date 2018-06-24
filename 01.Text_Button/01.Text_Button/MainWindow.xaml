@@ -1,0 +1,23 @@
+﻿<Window x:Class="_01.Text_Button.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_01.Text_Button"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <TextBlock x:Name="txtBlValue" Height="100" VerticalAlignment="Top">
+            <Hyperlink RequestNavigate="Hyperlink_RequestNavigate" 
+                       NavigateUri="https://google.com">
+                Open google.com
+            </Hyperlink>  
+            - <Bold>Chu dam</Bold> 
+            - <Italic><Underline>Chu nghieng, gach chan</Underline></Italic>
+            - <Span FontSize="35" FontFamily="Arial" Foreground="Red">Span element</Span>
+        </TextBlock>
+        
+        <TextBox x:Name="txtValue" Text="TextBox" Height="100" VerticalAlignment="Center"></TextBox>
+        <Button x:Name="btn1" Content="Copy textbox to textblock" Height="100" VerticalAlignment="Bottom" Click="btn1_Click"></Button>
+    </Grid>
+</Window>
