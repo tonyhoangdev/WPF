@@ -5,9 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Selenium"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="372" Width="817">
     <Grid>
-        <Button Content="Start" HorizontalAlignment="Left" Margin="293,177,0,0" VerticalAlignment="Top" Width="166" Height="84" Click="Button_Click"/>
 
+        <GroupBox x:Name="groupBox" Header="https://isach.info" HorizontalAlignment="Left" Height="201" Margin="20,0,0,0" VerticalAlignment="Top" Width="337">
+            <Grid>
+                <TextBlock x:Name="textBlock" Text="User:" Margin="10,19,285,139" RenderTransformOrigin="0.927,0.476"/>
+                <TextBox x:Name="txtUser" Text="hoangminh123" Height="30" Width="253" Margin="46,16,26,133"/>
+                <TextBlock x:Name="textBlock1" Text="Pass:" VerticalAlignment="Top" Margin="10,54,285,0"/>
+                <PasswordBox x:Name="passPass"  Width="253" Height="30" Password="Isach123" Margin="46,53,26,96"/>
+                <Button Content="Start" HorizontalAlignment="Left" Margin="183,103,0,0" VerticalAlignment="Top" Width="83" Height="50" Click="Button_Click"/>
+                <CheckBox x:Name="cbIsachInfo" Content="Start Isach.info" HorizontalAlignment="Left" Margin="21,117,0,0" VerticalAlignment="Top"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox x:Name="groupBox1" Header="Proxy" HorizontalAlignment="Left" Height="201" Margin="378,0,0,0" VerticalAlignment="Top" Width="366">
+            <Grid>
+                <CheckBox x:Name="cbProxyEnabled" Content="Enabled" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="10,44,0,0" TextWrapping="Wrap" Text="IP or host name:" VerticalAlignment="Top"/>
+                <TextBlock  HorizontalAlignment="Left" Margin="71,74,0,0" TextWrapping="Wrap" Text="port:" VerticalAlignment="Top"/>
+                <TextBox x:Name="txtProxyIp" HorizontalAlignment="Left" Height="23" Margin="110,41,0,0" TextWrapping="Wrap" Text="1.1.1.1" VerticalAlignment="Top" Width="208"/>
+                <TextBox x:Name="txtProxyPort" HorizontalAlignment="Left" Height="23" Margin="110,74,0,0" TextWrapping="Wrap" Text="8080" VerticalAlignment="Top" Width="208"/>
+                <CheckBox x:Name="cbProxyWebRTC" Content="Turn off WebRTC" HorizontalAlignment="Left" Margin="134,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.088,-0.125" IsChecked="True"/>
+                <TextBox x:Name="txtLink" HorizontalAlignment="Left" Height="23" Margin="10,132,0,0" TextWrapping="Wrap" ToolTip="Https://" Text="" VerticalAlignment="Top" Width="308"/>
+                <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="10,109,0,0" TextWrapping="Wrap" Text="Go to Link:" VerticalAlignment="Top"/>
+            </Grid>
+        </GroupBox>
     </Grid>
 </Window>
