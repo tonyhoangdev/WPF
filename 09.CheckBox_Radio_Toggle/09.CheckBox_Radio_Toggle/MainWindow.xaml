@@ -1,0 +1,52 @@
+﻿<Window x:Class="_09.CheckBox_Radio_Toggle.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_09.CheckBox_Radio_Toggle"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <StackPanel>
+            <GroupBox Header="CheckBox">
+                <CheckBox Content="CheckBox 1" IsChecked="True" IsEnabled="True"></CheckBox>
+            </GroupBox>
+            <GroupBox Header="RadioButton">
+                <StackPanel>
+                    <RadioButton Content="Radio 1"></RadioButton>
+                    <RadioButton Content="Radio 2"></RadioButton>
+                    <RadioButton Content="Radio 3"></RadioButton>
+
+                    <Border x:Name="br2" Visibility="Collapsed" BorderBrush="Black" BorderThickness="3" Margin="5">
+                        <StackPanel>
+                            <RadioButton Content="Radio 21"></RadioButton>
+                            <RadioButton Content="Radio 22"></RadioButton>
+                            <RadioButton Content="Radio 23"></RadioButton>
+                            <RadioButton Content="Radio 24"></RadioButton>
+                        </StackPanel>
+                    </Border>
+
+                    <Border BorderBrush="Black" BorderThickness="3" Margin="5">
+                        <StackPanel>
+                            <RadioButton Content="Radio 31"></RadioButton>
+                            <RadioButton Content="Radio 32"></RadioButton>
+                            <RadioButton Content="Radio 33"></RadioButton>
+                            <RadioButton Content="Radio 34"></RadioButton>
+                        </StackPanel>
+                    </Border>
+
+                    <Button Content="Click" Height="50" Width="120" Click="Button_Click"></Button>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="ToggleButton">
+                <ToggleButton IsChecked="True" ClickMode="Press" Width="120" Height="50" Content="ToggleButton"></ToggleButton>
+            </GroupBox>
+            <GroupBox Header="Slider">
+                <StackPanel>
+                    <Slider x:Name="sld1" Background="AntiqueWhite" Maximum="100" Value="45"></Slider>
+                    <TextBox x:Name="txt1" Text="{Binding ElementName=sld1, Path=Value}"></TextBox>
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+    </Grid>
+</Window>
