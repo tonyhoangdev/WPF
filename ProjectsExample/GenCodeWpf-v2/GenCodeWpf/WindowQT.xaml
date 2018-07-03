@@ -1,0 +1,60 @@
+﻿<Window x:Class="GenCodeWpf.WindowQT"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GenCodeWpf"
+        mc:Ignorable="d"
+        Title="Gen Q_PROPERTY - Tony" Height="495" Width="880">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="47*"/>
+            <RowDefinition Height="420*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="320"/>
+            <ColumnDefinition Width="283*"/>
+        </Grid.ColumnDefinitions>
+        <RichTextBox x:Name="richTextBox1" HorizontalAlignment="Left" Height="350" Margin="88,36,0,0" VerticalAlignment="Top" Width="211" Grid.Row="1">
+            <RichTextBox.Resources>
+                <Style TargetType="{x:Type Paragraph}">
+                    <Setter Property="Margin" Value="0"></Setter>
+                </Style>
+            </RichTextBox.Resources>
+
+            <FlowDocument LineStackingStrategy="BlockLineHeight">
+                <Paragraph>
+                    <Run Text="bool varName1"/>
+                    <LineBreak></LineBreak>
+                    <Run Text="int varName2"/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <RichTextBox x:Name="richTextBox2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" Grid.Column="1" Grid.Row="1">
+            <RichTextBox.Resources>
+                <Style TargetType="{x:Type Paragraph}">
+                    <Setter Property="Margin" Value="0"></Setter>
+                </Style>
+            </RichTextBox.Resources>
+
+            <FlowDocument AllowDrop="True">
+                <Paragraph>
+                    <Run Text="Tony Hehe"/>
+
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <Label Content="Properties" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Grid.Row="1" Height="26" Width="64"/>
+        <Label Content="Class" HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top" Grid.Row="1" Height="26" Width="37"/>
+        <Label Content="NameSpace" HorizontalAlignment="Left" Margin="10,21,0,0" VerticalAlignment="Top" Height="26" Width="73"/>
+        <TextBox x:Name="txtClass" HorizontalAlignment="Left" Height="23" Margin="88,8,0,0" TextWrapping="Wrap" Text="DataObject" VerticalAlignment="Top" Width="211" Grid.Row="1"/>
+        <TextBox x:Name="txtNameSpace" HorizontalAlignment="Left" Height="23" Margin="88,24,0,0" TextWrapping="Wrap" Text="TonyHehe" VerticalAlignment="Top" Width="211"/>
+        <Grid Grid.Column="1">
+            <Button x:Name="btnCopy" Content="Copy" HorizontalAlignment="Left" Margin="25,15,0,0" VerticalAlignment="Top" Width="60" Click="btnCopy_Click" Grid.Column="1"/>
+            <Button x:Name="btnGenVO" Content="Gen Header" HorizontalAlignment="Left" Margin="108,15,0,0" VerticalAlignment="Top" Width="82" Click="btnGenVO_Click"/>
+            <Button x:Name="btnGenSQL" Content="Gen CPP" HorizontalAlignment="Left" Margin="212,15,0,0" VerticalAlignment="Top" Width="86" Click="btnGenSQL_Click"/>
+            <Button x:Name="btnSave" Content="Save2File" HorizontalAlignment="Left" Margin="323,15,0,0" VerticalAlignment="Top" Width="60" Click="btnSave_Click"/>
+        </Grid>
+
+    </Grid>
+</Window>

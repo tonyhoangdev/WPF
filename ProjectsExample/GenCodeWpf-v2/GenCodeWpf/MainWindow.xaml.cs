@@ -580,6 +580,7 @@ namespace GenCodeWpf
 class Variable
 {
     string _name;
+    string _nameH;
     string _type;
     string _typeH;
 
@@ -596,6 +597,7 @@ class Variable
         _var = string.Format("{0}{1}", char.ToLower(name[0]), name.Substring(1));
 
         _typeH = string.Format("{0}{1}", char.ToUpper(type[0]), type.Substring(1));
+        NameH = string.Format("{0}{1}", char.ToUpper(name[0]), name.Substring(1));
         if (type == "byte[]") _typeH = "LongBlob";
         if (type == "int") _typeH = "Int32";
 
@@ -658,6 +660,6 @@ class Variable
         set { _typeH = value; }
     }
 
-
+    public string NameH { get => _nameH; set => _nameH = value; }
 }
 
