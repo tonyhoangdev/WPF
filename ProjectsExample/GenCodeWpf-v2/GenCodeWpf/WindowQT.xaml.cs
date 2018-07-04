@@ -60,7 +60,7 @@ namespace GenCodeWpf
         private string TAB(int n)
         {
             StringBuilder sb = new StringBuilder();
-           
+
             for (int i = 0; i < n; i++)
             {
                 sb.Append("    ");
@@ -82,15 +82,22 @@ namespace GenCodeWpf
             sb.AppendLine(String.Format("#include \"LogContext.h\""));
             sb.AppendLine();
             sb.AppendLine(String.Format("class {0} : public QObject", txtClass.Text));
-            sb.AppendLine("{"); 
+            sb.AppendLine("{");
             sb.AppendLine(TAB(1) + "Q_OBJECT");
 
             // Properties declare
             foreach (Variable var in vars)
             {
-                sb.AppendLine(TAB(1) + String.Format("Q_PROPERTY({0} {1} READ {1} WRITE set{2} NOTIFY {1}Changed)", var.Type, var.Name, var.NameH));
+                if (!var.IsPointer)
+                {
+                    sb.AppendLine(TAB(1) + String.Format("Q_PROPERTY({0} {1} READ {1} WRITE set{2} NOTIFY {1}Changed)", var.Type, var.Name, var.NameH));
+                }
+                else
+                {
+                    sb.AppendLine(TAB(1) + String.Format("Q_PROPERTY({0} {1} READ {1} CONSTANT)", var.Type, var.Name));
+                }
             }
-            
+
             // Public
             sb.AppendLine();
             sb.AppendLine("public:");
@@ -109,7 +116,10 @@ namespace GenCodeWpf
             sb.AppendLine("public slots:");
             foreach (Variable var in vars)
             {
-                sb.AppendLine(TAB(1) + String.Format("void set{0}({1} {2});", var.NameH, var.Type, var.Name));
+                if (!var.IsPointer)
+                {
+                    sb.AppendLine(TAB(1) + String.Format("void set{0}({1} {2});", var.NameH, var.Type, var.Name));
+                }
             }
 
             // Signals
@@ -117,15 +127,39 @@ namespace GenCodeWpf
             sb.AppendLine("signals:");
             foreach (Variable var in vars)
             {
-                sb.AppendLine(TAB(1) + String.Format("void {0}Changed({1} {0});", var.Name, var.Type));
+                if (!var.IsPointer)
+                {
+                    sb.AppendLine(TAB(1) + String.Format("void {0}Changed({1} {0});", var.Name, var.Type));
+                }
             }
 
-            // Signals
+            // Variables private
             sb.AppendLine();
             sb.AppendLine("private:");
             foreach (Variable var in vars)
             {
-                sb.AppendLine(TAB(1) + String.Format("{0} m_{1};", var.Type, var.Name));
+                if (!var.IsPointer)
+                {
+                    sb.AppendLine(TAB(1) + String.Format("{0} m_{1};", var.Type, var.Name));
+                }
+            }
+
+            // Variables public
+            foreach (Variable var in vars)
+            {
+                if (var.IsPointer)
+                {
+                    sb.AppendLine();
+                    sb.AppendLine("public:");
+                    break;
+                }
+            }
+            foreach (Variable var in vars)
+            {
+                if (var.IsPointer)
+                {
+                    sb.AppendLine(TAB(1) + String.Format("{0} m_{1};", var.Type, var.Name));
+                }
             }
 
 
@@ -136,7 +170,7 @@ namespace GenCodeWpf
             SetString(richTextBox2, sb.ToString());
         }
 
-        private string initVariable(string type)
+        private string initVariable(string type, bool isPointer = false)
         {
             string s = "";
 
@@ -149,6 +183,11 @@ namespace GenCodeWpf
                 default:
                     s = "0";
                     break;
+            }
+
+            if (isPointer)
+            {
+                s = type.Substring(0, type.IndexOf("*"));
             }
 
             return s;
@@ -173,8 +212,19 @@ namespace GenCodeWpf
 
             foreach (Variable var in vars)
             {
-                sb.AppendLine(",");
-                sb.Append(TAB(1) + String.Format("m_{0}({1})", var.Name, initVariable(var.Type)));
+                if (!var.IsPointer)
+                {
+                    sb.AppendLine(",");
+                    sb.Append(TAB(1) + String.Format("m_{0}({1})", var.Name, initVariable(var.Type, var.IsPointer)));
+                }
+            }
+            foreach (Variable var in vars)
+            {
+                if (var.IsPointer)
+                {
+                    sb.AppendLine(",");
+                    sb.Append(TAB(1) + String.Format("m_{0}(new {1}())", var.Name, initVariable(var.Type, var.IsPointer)));
+                }
             }
 
             sb.AppendLine();
@@ -185,6 +235,17 @@ namespace GenCodeWpf
             sb.AppendLine();
             sb.AppendLine(String.Format("{0}::~{0}()", txtClass.Text));
             sb.AppendLine("{");
+
+            foreach (Variable var in vars)
+            {
+                if (var.IsPointer)
+                {
+                    sb.AppendLine(TAB(1) + String.Format("if (m_{0} != nullptr)", var.Name));
+                    sb.AppendLine(TAB(1) + "{");
+                    sb.AppendLine(TAB(2) + String.Format("delete m_{0};", var.Name));
+                    sb.AppendLine(TAB(1) + "}");
+                }
+            }
             sb.AppendLine("}");
 
             // get funcs
@@ -196,15 +257,18 @@ namespace GenCodeWpf
                 sb.AppendLine(TAB(1) + String.Format("return m_{0};", var.Name));
                 sb.AppendLine("}");
 
-                sb.AppendLine();
-                sb.AppendLine(String.Format("void {0}::set{1}({2} {3})", txtClass.Text, var.NameH, var.Type, var.Name));
-                sb.AppendLine("{");
-                sb.AppendLine(TAB(1) + String.Format("if (m_{0} != {0})", var.Name));
-                sb.AppendLine(TAB(1) + "{");
-                sb.AppendLine(TAB(2) + String.Format("m_{0} = {0};", var.Name));
-                sb.AppendLine(TAB(2) + String.Format("emit {0}Changed({0});", var.Name));
-                sb.AppendLine(TAB(1) + "}");
-                sb.AppendLine("}");
+                if (!var.IsPointer)
+                {
+                    sb.AppendLine();
+                    sb.AppendLine(String.Format("void {0}::set{1}({2} {3})", txtClass.Text, var.NameH, var.Type, var.Name));
+                    sb.AppendLine("{");
+                    sb.AppendLine(TAB(1) + String.Format("if (m_{0} != {0})", var.Name));
+                    sb.AppendLine(TAB(1) + "{");
+                    sb.AppendLine(TAB(2) + String.Format("m_{0} = {0};", var.Name));
+                    sb.AppendLine(TAB(2) + String.Format("emit {0}Changed(m_{0});", var.Name));
+                    sb.AppendLine(TAB(1) + "}");
+                    sb.AppendLine("}");
+                }
 
             }
 

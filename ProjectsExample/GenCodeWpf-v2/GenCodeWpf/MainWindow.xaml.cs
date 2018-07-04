@@ -579,6 +579,7 @@ namespace GenCodeWpf
 
 class Variable
 {
+    bool _isPointer = false;
     string _name;
     string _nameH;
     string _type;
@@ -601,7 +602,7 @@ class Variable
         if (type == "byte[]") _typeH = "LongBlob";
         if (type == "int") _typeH = "Int32";
 
-        //  if(type == )
+        if (type.Contains("*")) _isPointer = true;
 
     }
     public string Declare
@@ -661,5 +662,6 @@ class Variable
     }
 
     public string NameH { get => _nameH; set => _nameH = value; }
+    public bool IsPointer { get => _isPointer; set => _isPointer = value; }
 }
 
