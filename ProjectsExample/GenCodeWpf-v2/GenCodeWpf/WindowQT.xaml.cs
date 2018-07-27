@@ -74,13 +74,32 @@ namespace GenCodeWpf
             string rtb1 = GetString(richTextBox1);
             List<Variable> vars = GetVars(rtb1);
             StringBuilder sb = new StringBuilder();
+            List<String> lstPointer = new List<String>();
+
+            foreach (Variable var in vars)
+            {
+                if (var.IsPointer)
+                {
+                    if (!lstPointer.Contains(var.Type.Remove(var.Type.IndexOf('*'))))
+                    {
+                        lstPointer.Add(var.Type.Remove(var.Type.IndexOf('*')));
+                    }
+                }
+            }
+
 
             sb.AppendLine(String.Format("#ifndef {0}_H", txtClass.Text.ToUpper()));
             sb.AppendLine(String.Format("#define {0}_H", txtClass.Text.ToUpper()));
             sb.AppendLine();
             sb.AppendLine(String.Format("#include <QObject>"));
-            sb.AppendLine(String.Format("#include \"LogContext.h\""));
+
+            // include Class
+            foreach (string var in lstPointer)
+            {
+                sb.AppendLine(String.Format("#include \"{0}.h\"", var));
+            }
             sb.AppendLine();
+
             sb.AppendLine(String.Format("class {0} : public QObject", txtClass.Text));
             sb.AppendLine("{");
             sb.AppendLine(TAB(1) + "Q_OBJECT");
