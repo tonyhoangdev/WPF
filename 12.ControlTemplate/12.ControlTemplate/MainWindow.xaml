@@ -1,0 +1,27 @@
+﻿<Window x:Class="_12.ControlTemplate.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_12.ControlTemplate"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <StackPanel>
+        <StackPanel.Resources>
+            <ControlTemplate x:Key="tmpButton">
+                <StackPanel Width="200">
+                    <Image Width="128" Source="Images/icon.png" Stretch="None"/>
+                    <TextBlock Text="{Binding}" HorizontalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </ControlTemplate>
+            <Style TargetType="Button">
+                <Setter Property="Height" Value="150" />
+            </Style>
+        </StackPanel.Resources>
+        <Button Name="btn1" Click="Button_Click" Content="button1" Template="{StaticResource tmpButton}"> 
+        </Button>
+        <Button Name="btn2" Content="button2" Template="{StaticResource tmpButton}">
+        </Button>
+        <Button Height="100" Content="Click" Click="Button_Click_1"></Button>
+    </StackPanel>
+</Window>
